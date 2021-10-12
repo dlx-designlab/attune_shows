@@ -133,4 +133,4 @@ dmypy.json
 
 
 #app specific
-/caps_img/**/
+/app/static/caps_img/**/

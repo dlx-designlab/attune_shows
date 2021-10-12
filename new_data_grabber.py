@@ -2,31 +2,27 @@ import base64
 import paramiko # used for ssh and sftp
 import os
 import time
-from icecream import ic
+# from icecream import ic
 
-remote_path = '~/Desktop/Attune/'
+remote_path = '~/Projects/Attune/scope_control_app/static/captured_pics/'
 
 # Get a list of local directoriess
-panormas_path = "caps_img/"
+panormas_path = "app/static/caps_img/"
 local_dirs = [ name for name in os.listdir(panormas_path) if os.path.isdir(os.path.join(panormas_path, name)) ]
-ic(local_dirs)
+print(local_dirs)
 
-# create a SSH client instance.
+# create a SSH client instance, Create a 'host_keys' object and load our local known hosts  
+# and Connect to our remote host using the SSH client
 client = paramiko.SSHClient()
-# Create a 'host_keys' object and load our local known hosts  
 host_keys = client.load_system_host_keys()
-# Connect to our remote host using the SSH client
-client.connect('attune-desktop.local', username='attune', password='attune2020')
+client.connect('attune-jetson.local', username='attune', password='attune2020')
 
 
-# Assign our input, output and error variables
-# to a command we will be issuing to the remote system 
+# Assign our input, output and error variables to a command we will be issuing to the remote system 
 stdin, stdout, stderr = client.exec_command(
     f'ls {remote_path}'
-    # 'readlink -f ~/Desktop/Attune/69B193/cap_69B193_2020-12-29_08-00-53_f045_pan95x121.png'
-    # 'find /path/data/ -name "pattern*" -mmin -15'
 )
-# let's wait for the command to finish 
+# Wait for the command to finish 
 time.sleep(2)
 
 # Make a list of remote directories
@@ -34,7 +30,7 @@ remote_dirs = []
 for line in stdout:
     remote_dirs.append(line.strip('\n'))
     # print('... ' + line.strip('\n'))
-ic(remote_dirs)
+print(remote_dirs)
 
 # compare local dirs and remote dirs and crete missing local dirs
 new_dirs = list(set(remote_dirs) - set(local_dirs))
@@ -46,11 +42,12 @@ if len(new_dirs) > 0:
 else:
     print("No new directories found")
 
+
 # Download new panorama files from the new directories detected on the JetScope
 for dir in new_dirs:
     
     stdin, stdout, stderr = client.exec_command(
-        f'find {remote_path + dir} -name ""*stitched..png""'
+        f'find {remote_path + dir} -name "*stitched..png" -o -name "*.csv"'
     )
     time.sleep(1)
 

@@ -31,10 +31,7 @@
             </div>
 
             <h3>こんにちわ {{ user }} </h3>
-            
-            <p>{{ url_for('static', filename='caps_img/' + user + '/' + panorama) }}</p>
-            <p>{{ url_for('static', filename='audio_samples/'+ audio) }}</p>            
-            
+                        
             <div class="cappilary_image">
                 <img src="{{ url_for('static', filename='caps_img/' + user + '/' + panorama)  }}" alt="Cappilary Panorama">
             </div>            
@@ -43,7 +40,11 @@
                 <source src="{{ url_for('static', filename='audio_samples/'+ audio) }}" type="audio/mpeg">
             </audio> 
 
-            
+            <div class="debug">
+                <p>{{ url_for('static', filename='caps_img/' + user + '/' + panorama) }}</p>
+                <p>{{ url_for('static', filename='audio_samples/'+ audio) }}</p>                
+            </div>
+
         
         </div>
     </body>

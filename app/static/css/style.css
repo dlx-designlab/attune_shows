@@ -68,3 +68,11 @@ body{
     margin: 20px 0px;
 }
 
+.debug{
+    font-size: 11px;
+    color: grey;
+}
+.debug p{
+    margin: 5px;
+    padding: 0px;
+}

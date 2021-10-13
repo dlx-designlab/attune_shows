@@ -26,3 +26,4 @@ def index():
     # print(UID_LIST)
     
     return render_template('index.html', user=UUID, panorama = pan_img, audio=AUD, uids = UID_LIST)
+

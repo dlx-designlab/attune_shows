@@ -41,11 +41,25 @@ body, html{margin:0; padding:0; border: 0; outline: 0; font-size: 100%; vertical
 .w3-display-bottommiddle{position:absolute;left:50%;bottom:0;transform:translate(-50%,0%);-ms-transform:translate(-50%,0%)} */
 
 body{
-    background-color: pink;
+    background-color: #fdbbbb;
+    background: radial-gradient(circle, transparent 20%, #fdbbbb 20%, #fdbbbb 80%, transparent 80%, transparent), radial-gradient(circle, transparent 20%, #fdbbbb 20%, #fdbbbb 80%, transparent 80%, transparent) 50px 50px, linear-gradient(#e5e5e5 4px, transparent 4px) 0 -2px, linear-gradient(90deg, #e5e5e5 4px, #fdbbbb 4px) -2px 0;
+    background-size: 100px 100px, 100px 100px, 50px 50px, 50px 50px;
 }
 
 .main_container{
     padding: 20px 0px;
+    width: 100%;
+}
+
+.user_id{
+    font-size: 2.5em;
+    width: 300px;
+    text-align: center;
+    background-color: whitesmoke;
+    padding: 15px;
+    margin: 10px auto;
+    margin-bottom: 40px;
+    border-radius: 25px;
 }
 
 .cappilary_image{
@@ -65,12 +79,29 @@ body{
 }
 
 .uid_search{
-    margin: 20px 0px;
+    /* background-color: white; */
+    width: 500px;
+    margin: 0 auto;
+    padding: 40px 20px 20px 20px;
+    text-align: center;
+    border-radius: 25px;
+    font-size: 1.5em;
+}
+
+.uid_search input{
+    border-radius: 10px;
+    padding: 10px;
+    width: 160px;
+}
+
+.uid_search button{
+    border-radius: 10px;
+    padding: 10px;    
 }
 
 .debug{
     font-size: 11px;
-    color: grey;
+    color: gray;
 }
 .debug p{
     margin: 5px;

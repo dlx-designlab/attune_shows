@@ -16,7 +16,7 @@ class MusicPicker:
         self.users_path = "app/static/caps_img/"
         self.density_range = (0, 30)
         self.distribution_range = (100, 1000)
-        self.brigntness_range = (10, 255)
+        self.brigntness_range = (2, 30)
 
     def dist(self, p1, p2):
         (x1, y1), (x2, y2) = p1, p2
@@ -50,11 +50,16 @@ class MusicPicker:
         # Calculate capillary density, distribution, and brightness
         cap_density = 0         # average ammount of apex points in a sample
         cap_distribution = 0    # average distance between apex points in a sample
-        cap_brightness = 0      # average brightness of the sample
+        cap_brightness = 20      # average brightness of the sample
 
         # convert data to coordinates
         clean_data = []
         for item in data:
+
+            # extract the 1st value which contains the apex prominace (brighness) data
+            # ap = item.pop(0).split("_")[1]
+            # cap_brightness += int(ap)
+
             # convert csv data to coordinates (x, y) format
             coordinates_data = []
             for i in range(0, len(item), 2):
@@ -73,7 +78,7 @@ class MusicPicker:
 
         cap_density = int(cap_density / len(clean_data))
         cap_distribution = int(cap_distribution / len(clean_data))
-        cap_brightness = 0
+        cap_brightness = int(cap_brightness / len(clean_data))
 
         ic(cap_density)
         ic(cap_distribution)
@@ -81,7 +86,7 @@ class MusicPicker:
 
         # remap values to a range of 0-3 and struct a filename to match the music file names
         # Todo: find correct ranges for cap_density, cap_distribution, cap_brightness
-        values_filename = f"{int(self.remap_values(cap_density, self.density_range[0], self.density_range[1],))}{int(self.remap_values(cap_distribution, self.distribution_range[0], self.distribution_range[1],))}{int(cap_brightness)}"
+        values_filename = f"{int(self.remap_values(cap_density, self.density_range[0], self.density_range[1],))}{int(self.remap_values(cap_distribution, self.distribution_range[0], self.distribution_range[1],))}{int(self.remap_values(cap_brightness, self.brigntness_range[0], self.brigntness_range[1],))}"
         
         print(f"writing values to file: {values_filename}")
 

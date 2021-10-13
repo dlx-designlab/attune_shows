@@ -6,31 +6,19 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=yes">
         <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}">        
         <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+
         
         <!-- dialog boxes dependencies-->
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
+        <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css"> -->
         <!-- cool icons dependencies -->
-        <script src="https://kit.fontawesome.com/9d94ef417f.js" crossorigin="anonymous"></script>
+        <!-- <script src="https://kit.fontawesome.com/9d94ef417f.js" crossorigin="anonymous"></script> -->
         <!-- <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/font_awesome.css') }}">         -->
 
     </head>
     <body>
         <div class="main_container">     
-            
-            <div class="uid_search">
-                <form action="http://localhost:5000/" method="GET">
-                    <label for="uid_list">Find UID:</label>
-                    <input list="UIDs" name="uid" id="uid">            
-                    <datalist id="UIDs">
-                        {% for uid in uids %}
-                            <option value="{{uid}}">
-                        {% endfor %}
-                    </datalist>
-                    <input type="submit" value="GO"/> 
-                </form>
-            </div>
 
-            <h3>こんにちわ {{ user }} </h3>
+            <div class="user_id"> {{ user }} </div>
                         
             <div class="cappilary_image">
                 <img src="{{ url_for('static', filename='caps_img/' + user + '/' + panorama)  }}" alt="Cappilary Panorama">
@@ -39,12 +27,23 @@
             <audio controls autoplay loop class="audio_player">
                 <source src="{{ url_for('static', filename='audio_samples/'+ audio) }}" type="audio/mpeg">
             </audio> 
+            
+            <div class="uid_search">
+                <form action="http://localhost:5000/" method="GET">
+                    <input list="UIDs" name="uid" id="uid" value="{{user}}">
+                    <datalist id="UIDs">
+                        {% for uid in uids %}
+                            <option value="{{uid}}">
+                        {% endfor %}
+                    </datalist>
+                    <button type="submit">GO</button> 
+                </form>
+            </div>
 
             <div class="debug">
                 <p>{{ url_for('static', filename='caps_img/' + user + '/' + panorama) }}</p>
                 <p>{{ url_for('static', filename='audio_samples/'+ audio) }}</p>                
             </div>
-
         
         </div>
     </body>
